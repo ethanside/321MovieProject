@@ -1,5 +1,6 @@
 ---
 title: "Initial Analysis: Movies (CS&SS 321)"
+author: "Emma Favier, Georgia Pertsch, Aakash Krishna, Ethan Side"
 output: pdf_document
 ---
 
