@@ -1,7 +1,10 @@
 ---
 title: "Final Project Report (CS&SS 321)"
 author: "Emma Favier, Georgia Pertsch, Aakash Krishna, Ethan Side"
-output: pdf_document
+output:
+  pdf_document: default
+  html_document: default
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -246,6 +249,35 @@ print(rating_counts)
   
 ```
 
+```{r}
+ combined_counts <- bind_rows(
+    data.frame(Quartile = "1", rating_counts),
+    data.frame(Quartile = "2", rating_counts2),
+    data.frame(Quartile = "3", rating_counts3),
+    data.frame(Quartile = "4", rating_counts4)
+  )  
+
+combined_plot <- combined_counts %>%
+    mutate(rating = factor(rating,
+                           levels = c("G","TV-G","TV-Y", 
+                                      "TV-Y7","PG","TV-PG", 
+                                      "PG-13","TV-14", "R","TV-MA", "NR","UR"))) %>%
+    ggplot(aes(x = Quartile, y = n, fill = Quartile)) +
+    geom_col(position = "dodge") +
+    geom_text(aes(label = paste0(round(percentage, 1), "%")), 
+              position = position_dodge(width = 0.9),
+              vjust = -0.5) +
+    scale_fill_brewer(palette = "Set1") +
+    labs(title = "Percentage of Total Rating Counts per Rating by Quartile",
+         x = "Quartile", y = "Count") +
+    facet_wrap(~ rating, scales = "free", ncol = 3) +
+    theme_bw() +
+    scale_y_continuous(expand = expansion(mult = c(0.1, 1.0))) + 
+    theme(text = element_text(size = 8))
+ 
+  combined_plot
+```
+
 ## Results:  scatterplot of the main relationship of interest and output for the main regression
 To conclude our exploratory analysis we split all the countries in our dataset into gdp quartiles to see the distribution of television and movie parental ratings. Ranging from TV-7 to TV-MA for television ratings and General Audiences to Restricted for movies. In our exploration of these distributions there were significant takeaways that could be seen by the distribution. Fourth quartile countries had a significantly higher percentage of movies rated G and PG than any other quartile country while their R rated movie percentage was 13.1% which was the lowest percentage of any quartile. This trend proposes that wealthy countries, whose quality of life is higher, make more family friendly films as their audiences prefer happy go-lucky films as it may be more relatable content for their citizens. This higher proportion of lighter cinema may also be because families in the wealthiest nations in the world can afford to buy movie tickets for their entire family, a purchase that could be significantly less probable for a family less fortunate. This key distinction may be a reason that production companies in lower GDP countries make fewer G and PG rated films as they believe that there won’t be the same box office dollars compared to more adult themed films. As countries in the first and second quartile of GDP produce more R rated films due to this disparity in potential box office dollars.
 
@@ -253,7 +285,7 @@ In contrast, the ratings for  television shows of TV-G, TV-Y, and TV-Y7 in fourt
 
 ## Conclusion: a brief conclusion summarizing the results, assesses the extent to which you found support for your hypothesis, and describes limitations of your analysis and threats to inference
 
-Based off our findings it is safe to say that while mature films and television shows dominate the overall industry, for in both industries the most mature rating is the highest proportion of content produced, the proportion of production on content for more broad audiences is based off the lifestyles of people in their countries respective  GDP quartile. Another insight that we gained was how differences in a countries wealth affect not only the ratings of a movie but what types of movies they produce. From our analysis we found that less fortunate countries like Nigeria and India have a significantly higher proportion of movies that fall in the drama category, of all the movies that netflix has in their dataset Nigeria and India have over 66% of their movies catagorized as dramas compared to the United States and the United Kingdom which only have 27.6% and 16.2% of their film project categorized as dramas respectively. This massive difference is possibly due to both the UK and US falling under high income countries which have a significantly higher amount of movies produced on Netflix but could also be that countries with lower incomes produce dramas as their citizens prefer the escapism that happens when watching dramas. This trend also happens when looking at the proportion of comedies produced as again Nigeria and india have much higher proportions than their high income counterparts. While these proportions are useful to get a grasp as to what certain countries produce the data we are working with only views movies and TV shows that are on the Netflix app so to come to conclusions about a countries cultural association with their cinema based off just what Netflix has would not paint the full picture. As their is a good chance that there may be different proportions if we were to look at all streaming service apps or an entire file of each countries movies produced all time. Yet even though our research isn’t conclusive enough to make umbrella statements about a countries relationship to their cinema it is conclusive enough to say that each countries variation in genre and ratings of films produced has much to do with the income of the citizens who reside there.
+Based off our findings it is safe to say that while mature films and television shows dominate the overall industry, for in both industries the most mature rating is the highest proportion of content produced, the proportion of production on content for more broad audiences is based off the lifestyles of people in their countries respective  GDP quartile. Another insight that we gained was how differences in a countries wealth affect not only the ratings of a movie but what types of movies they produce. From our analysis we found that less fortunate countries like Nigeria and India have a significantly higher proportion of movies that fall in the drama category, of all the movies that Netflix has in their data set Nigeria and India have over 66% of their movies categorized as dramas compared to the United States and the United Kingdom which only have 27.6% and 16.2% of their film project categorized as dramas respectively. This massive difference is possibly due to both the UK and US falling under high income countries which have a significantly higher amount of movies produced on Netflix but could also be that countries with lower incomes produce dramas as their citizens prefer the escapism that happens when watching dramas. This trend also happens when looking at the proportion of comedies produced as again Nigeria and India have much higher proportions than their high income counterparts. While these proportions are useful to get a grasp as to what certain countries produce the data we are working with only views movies and TV shows that are on the Netflix app so to come to conclusions about a countries cultural association with their cinema based off just what Netflix has would not paint the full picture. As their is a good chance that there may be different proportions if we were to look at all streaming service apps or an entire file of each countries movies produced all time. Yet even though our research isn’t conclusive enough to make umbrella statements about a countries relationship to their cinema it is conclusive enough to say that each countries variation in genre and ratings of films produced has much to do with the income of the citizens who reside there.
 
 \pagebreak
 
