@@ -1,5 +1,5 @@
 ---
-title: "Initial Analysis: Movies (CS&SS 321)"
+title: "Final Project Report (CS&SS 321)"
 author: "Emma Favier, Georgia Pertsch, Aakash Krishna, Ethan Side"
 output: pdf_document
 ---
@@ -28,9 +28,9 @@ The global film industry “brings jobs, revenue, and related infrastructure dev
 
 # Research question and hypotheses
 
-In this research project, we are investigating the relationship between GDP and ratings of film in a given country; our research questions are, are film ratings higher (as in more mature) in countries with higher GDPs and lower (as in less mature) in countries with lower GDPs, and, do countries with higher GDPs produce more movies?
+In this research project, we are investigating the relationship between GDP and ratings of film in our given countries: United States, China, United Kingdom, Japan, and India. Our research questions are: are film ratings higher (as in more restricted) in countries with higher GDPs and lower (as in less restricted) in countries with lower GDPs, and, do countries with higher GDPs produce more movies than countries with lower GDPs?
 
-We suspect that countries in higher GDP ranges will have higher film ratings, and countries in lower GDP ranges will have lower film ratings. Additionally, we speculate that countries in a higher GDP range on average produce more movies than countries in a lower GDP range.
+We suspect that countries in higher GDP ranges will have higher film ratings, and countries in lower GDP ranges will have lower film ratings. Additionally, we speculate that countries in a higher GDP range on average produce more movies than countries in a lower GDP range because of accessibility of resources needed for film to thrive. 
 
 
 ## Research design (Part 1)
@@ -112,9 +112,7 @@ UK_comedy_proportion <- table(UK_data_set1$Comedy1)
 
 ## Research Design (Part 2)
 
-The research design for this portion of our analysis is breaking down how ratings change in one country as GDP fluctuates in order to to analyze without the different impacts studying countries different countries can have. 
-
-In order to do this we created a merged data file that was merged with both country and year/ year of release as the common factor.
+The research design for this portion of our analysis is breaking down how ratings change in one country as GDP fluctuates in order to to analyze without the different impacts studying countries different countries can have. In order to do this, we created a merged data file that was merged with both country and year/ year of release as the common factor.
 
 ```{r}
 datax <- read_csv("netflix_titles.csv") %>% 
@@ -133,7 +131,7 @@ mergeddata <- datax %>%
 
 ```
 
-Then we created a new column labeled `' GDPcategory '` which was labelled 1, 2, 3, or 4 based on which quartile the country's GDP was in that year.
+Then, we created a new column labeled `' GDPcategory '` which was labelled 1, 2, 3, or 4 based on which quartile the country's GDP was in that year.
 
 ```{r}
 usa <- mergeddata %>% filter(country == "United States")
@@ -152,7 +150,7 @@ We will be looking at the differences in these graphs to view change.
 
 ## Data: the source of the data, measurement, and uses plots to summarize the dependent variable
 
-We acquired our data from Kaggle.com, a website that offers a free and online repository of community-uploaded datasets. In the dataset, GDP was measured as high-income, upper-middle income, lower-middle income, or low income depending on what range a given country falls into. Ratings were measured as TV-7 (suitable for older than 7 yrs) to TV-MA (Mature) for television and G (General Audiences) to R (Restricted) for movies.
+We acquired the film data from Kaggle.com, a website that offers a free and online repository of community-uploaded datasets. In the dataset, GDP was measured as high-income, upper-middle income, lower-middle income, or low income depending on what range a given country falls into. Ratings were measured as TV-7 (suitable for 7 yrs and older) to TV-MA (Mature) for television and G (General Audiences) to R (Restricted) for movies. We acquired the GDP data from the Bureau of Economic Analysis of the United States government. 
 
 ```{r}
 lowestquartileUSA <- usa %>% 
